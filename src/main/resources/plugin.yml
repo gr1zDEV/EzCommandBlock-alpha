@@ -1,0 +1,28 @@
+name: EzCommandBlocker
+version: '${version}'
+main: com.ezinnovations.ezcommandblocker.EzCommandBlocker
+api-version: '1.21'
+folia-supported: true
+description: Block and whitelist commands with tab completion control.
+author: EzInnovations
+commands:
+  ezcommandblocker:
+    description: Main command for EzCommandBlocker
+    aliases: [ecb]
+    permission: ezcommandblocker.admin
+permissions:
+  ezcommandblocker.admin:
+    description: Access to reload and admin commands
+    default: op
+  ezcommandblocker.bypass:
+    description: Bypass all command blocking
+    default: op
+  ezcommandblocker.bypass.tab:
+    description: Bypass tab completion filtering
+    default: op
+  ezcommandblocker.tab.*:
+    description: Wildcard for all tab groups
+    default: false
+  ezcommandblocker.notify:
+    description: Receive update notifications on join
+    default: op

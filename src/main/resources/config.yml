@@ -1,0 +1,124 @@
+# EzCommandBlocker Configuration
+
+# Tab completion groups - controls which commands appear in tab completion.
+# Players need permission: ezcommandblocker.tab.<group>
+# The "default" group applies to ALL players without a specific group permission.
+# Do NOT remove the default group.
+tab:
+  default:
+    # Higher priority = selected first when player has multiple groups
+    priority: 0
+    commands:
+      - "/afk"
+      - "/ah"
+      - "/auctionhouse"
+      - "/bal"
+      - "/baltop"
+      - "/bounty"
+      - "/buy"
+      - "/discord"
+      - "/graves"
+      - "/homes"
+      - "/msg"
+      - "/order"
+      - "/pay"
+      - "/qr"
+      - "/rep"
+      - "/rtp"
+      - "/gems"
+      - "/sell"
+      - "/sellhistory"
+      - "/selltop"
+      - "/settings"
+      - "/shop"
+      - "/spawn"
+      - "/store"
+      - "/whereami"
+      - "/worth"
+      - "/world"
+      - "/mute"
+      - "/r"
+      - "/reply"
+      - "/channel"
+      - "/ignore"
+  vip:
+    priority: 1
+    # Inherits all commands from the "default" group
+    extends: default
+    commands:
+      - "/home"
+
+# Actions executed when a player uses a blocked command.
+# Supported action types:
+#   message: <text>           - Send a color-coded message to the player
+#   console_command: <cmd>    - Execute a command from console (%player% placeholder)
+#   player_command: <cmd>     - Force the player to run a command
+#   kick: <reason>            - Kick the player with a reason
+blocked_command_default_actions:
+  - "message: &8[&b&lEz&8] &cThat command doesn't exist."
+
+# Notify OP players on join if a plugin update is available
+update_notify: true
+
+# Set to true if using EzCommandBlocker on both proxy and backend
+is_network: false
+
+# Set to true for 1.12 and below compatibility (requires ProtocolLib)
+# Requires server restart to apply.
+legacy_support: false
+
+# If true, the "commands" list below acts as a WHITELIST (only listed commands are allowed).
+# If false, the "commands" list acts as a BLACKLIST (listed commands are blocked).
+use_commands_as_whitelist: true
+
+# List of commands to block (or whitelist if use_commands_as_whitelist is true).
+commands:
+  - "/afk"
+  - "/ah"
+  - "/auctionhouse"
+  - "/bal"
+  - "/baltop"
+  - "/bounty"
+  - "/buy"
+  - "/discord"
+  - "/findplayer"
+  - "/fp"
+  - "/graves"
+  - "/homes"
+  - "/msg"
+  - "/order"
+  - "/pay"
+  - "/qr"
+  - "/rep"
+  - "/rtp"
+  - "/gems"
+  - "/sell"
+  - "/sellhistory"
+  - "/selltop"
+  - "/settings"
+  - "/shop"
+  - "/spawn"
+  - "/store"
+  - "/whereami"
+  - "/worth"
+  - "/website"
+  - "/world"
+  - "/mute"
+  - "/r"
+  - "/reply"
+  - "/channel"
+  - "/ignore"
+
+# Block any command containing ":" (e.g., /bukkit:help)
+block_colon_commands: false
+
+# Custom actions for specific command groups (overrides default actions).
+# %player% is replaced with the player's name.
+custom_commands_actions:
+  example1:
+    commands:
+      - "/ver"
+      - "/version"
+      - "/about"
+    actions:
+      - "console_command: kick %player% You can't see the version of the server!"
