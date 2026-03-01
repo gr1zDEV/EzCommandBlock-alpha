@@ -6,6 +6,7 @@ import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.command.CommandExecuteEvent;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.proxy.ProxyReloadEvent;
+import com.velocitypowered.api.plugin.PluginContainer;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
@@ -22,11 +23,13 @@ public final class EzCommandBlockerVelocity {
     private final VelocityConfigManager configManager;
 
     @Inject
-    public EzCommandBlockerVelocity(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory) {
+    public EzCommandBlockerVelocity(ProxyServer server,
+                                    PluginContainer pluginContainer,
+                                    Logger logger,
+                                    @DataDirectory Path dataDirectory) {
         this.logger = logger;
         this.configManager = new VelocityConfigManager(dataDirectory);
-
-        server.getEventManager().register(this, this);
+        server.getEventManager().register(pluginContainer, this);
     }
 
     @Subscribe
