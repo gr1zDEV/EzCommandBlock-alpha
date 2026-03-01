@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.velocitypowered.api.event.PostOrder;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.command.CommandExecuteEvent;
+import com.velocitypowered.api.event.player.TabCompleteEvent;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.proxy.ProxyReloadEvent;
 import com.velocitypowered.api.plugin.PluginContainer;
@@ -57,18 +58,41 @@ public final class EzCommandBlockerVelocity {
             return;
         }
 
-        final boolean containsColon = baseCommand.contains(":");
-        final boolean listed = configManager.getCommandSet().contains(baseCommand);
-
-        final boolean blocked = (configManager.isBlockColonCommands() && containsColon)
-                || (configManager.isUseCommandsAsWhitelist() ? !listed : listed);
-
-        if (!blocked) {
+        if (!isBlocked(baseCommand)) {
             return;
         }
 
         event.setResult(CommandExecuteEvent.CommandResult.denied());
         player.sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(configManager.getBlockedMessage()));
+    }
+
+    @Subscribe(order = PostOrder.FIRST)
+    public void onTabComplete(TabCompleteEvent event) {
+        if (!(event.getSource() instanceof Player player)) {
+            return;
+        }
+
+        if (player.hasPermission(BYPASS_PERMISSION) || player.hasPermission("ezcommandblocker.bypass.tab")) {
+            return;
+        }
+
+        if (event.getPartialMessage().contains(" ")) {
+            return;
+        }
+
+        event.getSuggestions().removeIf(suggestion -> isBlocked(VelocityConfigManager.normalizeCommand(suggestion)));
+    }
+
+    private boolean isBlocked(String baseCommand) {
+        if (baseCommand.isBlank()) {
+            return false;
+        }
+
+        final boolean containsColon = baseCommand.contains(":");
+        final boolean listed = configManager.getCommandSet().contains(baseCommand);
+
+        return (configManager.isBlockColonCommands() && containsColon)
+                || (configManager.isUseCommandsAsWhitelist() ? !listed : listed);
     }
 
     private void reloadConfig() {
