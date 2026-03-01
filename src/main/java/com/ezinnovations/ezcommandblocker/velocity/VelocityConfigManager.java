@@ -58,7 +58,7 @@ public final class VelocityConfigManager {
 
             blockColonCommands = readBoolean(map, "block_colon_commands", false);
             useCommandsAsWhitelist = readBoolean(map, "use_commands_as_whitelist", true);
-            blockedMessage = Objects.toString(map.getOrDefault("blocked_message", blockedMessage), blockedMessage);
+            blockedMessage = Objects.toString(map.get("blocked_message"), blockedMessage);
             commandSet = Collections.unmodifiableSet(normalizeCommands(map.get("commands")));
         }
     }
