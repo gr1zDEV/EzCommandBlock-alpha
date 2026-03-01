@@ -19,11 +19,8 @@ jobs:
           java-version: 21
           cache: gradle
 
-      - name: Grant execute permission
-        run: chmod +x ./gradlew
-
       - name: Build
-        run: ./gradlew build
+        run: gradle build --no-daemon
 
       - name: Upload JAR
         uses: actions/upload-artifact@v4
