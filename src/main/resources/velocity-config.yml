@@ -1,0 +1,18 @@
+# EzCommandBlocker Velocity config
+#
+# true  = only commands in `commands` are allowed
+# false = commands in `commands` are blocked
+use_commands_as_whitelist: true
+
+# Blocks namespaced commands like /minecraft:help
+block_colon_commands: true
+
+# Message sent to players when a command is blocked
+blocked_message: "&cYou are not allowed to use this command on this network."
+
+# Base commands only (no leading slash needed)
+commands:
+  - "msg"
+  - "r"
+  - "hub"
+  - "server"

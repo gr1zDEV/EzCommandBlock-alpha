@@ -1,6 +1,6 @@
 # EzCommandBlocker
 
-EzCommandBlocker is a Paper 1.21.1 plugin (with Folia support) for blocking or whitelisting commands, filtering tab completion per permission group, and executing custom actions when commands are blocked.
+EzCommandBlocker is a Paper 1.21.1 plugin (with Folia support) and Velocity plugin for blocking or whitelisting commands, filtering tab completion per permission group, and executing custom actions when commands are blocked.
 
 ## Features
 
@@ -15,6 +15,7 @@ EzCommandBlocker is a Paper 1.21.1 plugin (with Folia support) for blocking or w
   - `kick`
 - Folia-aware scheduler helper and `folia-supported: true` plugin metadata.
 - Admin reload command: `/ezcommandblocker reload` (alias `/ecb reload`).
+- Velocity proxy command filtering using the same whitelist/blacklist command model.
 
 ## Permissions
 
@@ -30,6 +31,8 @@ EzCommandBlocker is a Paper 1.21.1 plugin (with Folia support) for blocking or w
 ## Configuration Overview
 
 Configuration is located in `src/main/resources/config.yml` and is copied to the plugin data folder on first startup.
+
+Velocity-specific configuration is located in `src/main/resources/velocity-config.yml` and copied to the proxy plugin data folder as `config.yml`.
 
 - `tab`: Defines tab completion groups.
   - Each group has `priority`, `commands`, and optional `extends`.

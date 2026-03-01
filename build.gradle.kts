@@ -18,10 +18,13 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
+    compileOnly("com.velocitypowered:velocity-api:3.4.0-SNAPSHOT")
+    annotationProcessor("com.velocitypowered:velocity-api:3.4.0-SNAPSHOT")
+    implementation("org.yaml:snakeyaml:2.2")
 }
 
 tasks.processResources {
-    filesMatching("plugin.yml") {
+    filesMatching(listOf("plugin.yml", "META-INF/velocity-plugin.json")) {
         expand("version" to project.version)
     }
 }
