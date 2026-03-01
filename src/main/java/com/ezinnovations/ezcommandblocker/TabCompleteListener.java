@@ -3,8 +3,9 @@ package com.ezinnovations.ezcommandblocker;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatTabCompleteEvent;
+import org.bukkit.command.CommandSender;
 import org.bukkit.event.player.PlayerCommandSendEvent;
+import org.bukkit.event.server.TabCompleteEvent;
 
 import java.util.Locale;
 import java.util.Set;
@@ -29,19 +30,29 @@ public final class TabCompleteListener implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onAsyncChatTab(AsyncPlayerChatTabCompleteEvent event) {
-        final Player player = event.getPlayer();
+    public void onTabComplete(TabCompleteEvent event) {
+        final CommandSender sender = event.getSender();
+        if (!(sender instanceof Player player)) {
+            return;
+        }
+
         if (player.hasPermission("ezcommandblocker.bypass.tab")) {
+            return;
+        }
+
+        final String buffer = event.getBuffer();
+        if (!buffer.startsWith("/")) {
+            return;
+        }
+
+        if (buffer.trim().contains(" ")) {
             return;
         }
 
         final String groupName = resolveGroupName(player);
         final Set<String> allowedCommands = configManager.resolveGroupCommands(groupName);
-        event.getTabCompletions().removeIf(completion -> {
+        event.getCompletions().removeIf(completion -> {
             final String normalized = normalize(completion);
-            if (!completion.startsWith("/")) {
-                return false;
-            }
             return !allowedCommands.contains(normalized);
         });
     }
