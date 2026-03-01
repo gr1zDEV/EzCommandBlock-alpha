@@ -67,10 +67,8 @@ public final class EzCommandBlockerVelocity {
     }
 
     @Subscribe(order = PostOrder.FIRST)
-    public void onTabComplete(TabCompleteEvent event) {
-        if (event.getPlayer().isEmpty()) {
-            return;
-        }
+            final Player player = event.getPlayer();
+
 
         final Player player = event.getPlayer().get();
 
