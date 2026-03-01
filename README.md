@@ -60,11 +60,14 @@ gradle wrapper
 ./gradlew build
 ```
 
-Built JAR output:
+Built JAR outputs:
 
 ```text
-build/libs/EzCommandBlocker-<version>.jar
+build/libs/EzCommandBlocker-paper-<version>.jar
+build/libs/EzCommandBlocker-velocity-<version>.jar
 ```
+
+Use the `-paper-` artifact on Paper/Folia servers, and the `-velocity-` artifact on Velocity proxies.
 
 ## Release Workflow
 

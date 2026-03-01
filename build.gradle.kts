@@ -29,6 +29,36 @@ tasks.processResources {
     }
 }
 
+val paperJar by tasks.registering(Jar::class) {
+    group = "build"
+    description = "Builds the Paper/Folia plugin JAR."
+
+    archiveBaseName.set("EzCommandBlocker-paper")
+    from(sourceSets.main.get().output)
+    include("com/ezinnovations/ezcommandblocker/**")
+    exclude("com/ezinnovations/ezcommandblocker/velocity/**")
+    include("plugin.yml")
+    include("config.yml")
+    exclude("META-INF/velocity-plugin.json")
+}
+
+val velocityJar by tasks.registering(Jar::class) {
+    group = "build"
+    description = "Builds the Velocity plugin JAR."
+
+    archiveBaseName.set("EzCommandBlocker-velocity")
+    from(sourceSets.main.get().output)
+    include("com/ezinnovations/ezcommandblocker/velocity/**")
+    include("META-INF/velocity-plugin.json")
+    include("velocity-config.yml")
+    exclude("plugin.yml")
+    exclude("config.yml")
+}
+
 tasks.jar {
-    archiveBaseName.set("EzCommandBlocker")
+    enabled = false
+}
+
+tasks.assemble {
+    dependsOn(paperJar, velocityJar)
 }
