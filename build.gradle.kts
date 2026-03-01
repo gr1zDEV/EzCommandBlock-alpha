@@ -24,7 +24,7 @@ dependencies {
 }
 
 tasks.processResources {
-    filesMatching(listOf("plugin.yml", "META-INF/velocity-plugin.json")) {
+    filesMatching(listOf("plugin.yml", "velocity-plugin.json")) {
         expand("version" to project.version)
     }
 }
@@ -39,7 +39,7 @@ val paperJar by tasks.registering(Jar::class) {
     exclude("com/ezinnovations/ezcommandblocker/velocity/**")
     include("plugin.yml")
     include("config.yml")
-    exclude("META-INF/velocity-plugin.json")
+    exclude("velocity-plugin.json")
 }
 
 val velocityJar by tasks.registering(Jar::class) {
@@ -49,7 +49,7 @@ val velocityJar by tasks.registering(Jar::class) {
     archiveBaseName.set("EzCommandBlocker-velocity")
     from(sourceSets.main.get().output)
     include("com/ezinnovations/ezcommandblocker/velocity/**")
-    include("META-INF/velocity-plugin.json")
+    include("velocity-plugin.json")
     include("velocity-config.yml")
     exclude("plugin.yml")
     exclude("config.yml")
