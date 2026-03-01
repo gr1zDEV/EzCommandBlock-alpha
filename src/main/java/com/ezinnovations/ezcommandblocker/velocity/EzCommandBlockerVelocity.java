@@ -68,9 +68,11 @@ public final class EzCommandBlockerVelocity {
 
     @Subscribe(order = PostOrder.FIRST)
     public void onTabComplete(TabCompleteEvent event) {
-        if (!(event.getSource() instanceof Player player)) {
+        if (event.getPlayer().isEmpty()) {
             return;
         }
+
+        final Player player = event.getPlayer().get();
 
         if (player.hasPermission(BYPASS_PERMISSION) || player.hasPermission("ezcommandblocker.bypass.tab")) {
             return;
