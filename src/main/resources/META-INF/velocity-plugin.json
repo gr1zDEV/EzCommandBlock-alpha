@@ -1,0 +1,8 @@
+{
+  "id": "ezcommandblocker",
+  "name": "EzCommandBlocker",
+  "version": "${version}",
+  "description": "Command blocking plugin for Velocity and Paper/Folia.",
+  "authors": ["EzInnovations"],
+  "main": "com.ezinnovations.ezcommandblocker.velocity.EzCommandBlockerVelocity"
+}
